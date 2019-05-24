@@ -18,9 +18,12 @@ export class UserService {
     getCurrentUser() {
         return new Promise<any>((resolve, reject) => {
             var user = firebase.auth().onAuthStateChanged(function (user) {
+                console.log(user);
                 if (user) {
+                    // console.log(user);
                     resolve(user);
                 } else {
+                    // console.log('no user logged');
                     reject('No user logged in');
                 }
             })
@@ -43,6 +46,10 @@ export class UserService {
 
     getUsers(){
         return this.db.collection('users').snapshotChanges();
+    }
+
+    getUser(uid){
+        return this.db.collection('users').doc(uid).snapshotChanges();
     }
 
     changePermissions(isBlocked, uid) {
