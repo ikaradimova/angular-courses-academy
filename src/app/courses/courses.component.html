@@ -1,15 +1,14 @@
 <div *ngFor="let course of courses">
     <div class="course-card col-2">
-        <ng-template [ngIf]="isLogged && userRole == 'admin'" >
+        <ng-template [ngIf]="isLogged && userRole == 'admin'">
             <div class="action-holder">
                 <i class="fas fa-edit" (click)="editCourse(course.uid)"></i>
                 <i class="fas fa-trash-alt" (click)="deleteCourse(course.uid)"></i>
             </div>
         </ng-template>
-        <ng-template [ngIf]="isLogged && userRole == 'user'" >
-            <div  class="action-holder">
-                <i class="fas fa-cart-plus"></i>
-                <i class="fas fa-star"></i>
+        <ng-template [ngIf]="isLogged && userRole == 'user'">
+            <div class="action-holder">
+                <i class="fas fa-cart-plus" (click)="joinCourse(user.uid, course.uid)"></i>
             </div>
 
         </ng-template>
@@ -17,9 +16,15 @@
             <div class="title">
                 <span>{{ course.title }}</span>
             </div>
+            <div *ngIf="course.rating > 0 else noRatingTemplate">
+                Rating: {{course.rating}}/5
+            </div>
+            <ng-template #noRatingTemplate>No ratings.</ng-template>
+
             <hr>
             <div class="description">
-                <span>{{ course.description }}</span>
+                <span>{{ course.description.substr(0, 60) }}</span>
+                <span style="cursor: pointer" (click)="showCourse(course.uid)">... (Read more)</span>
             </div>
         </div>
     </div>

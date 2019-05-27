@@ -2,5 +2,7 @@ export class Course {
     uid: string;
     title: string;
     description: string;
-    rating: boolean;
+    rating: number;
+    rate: number;
+    numberOfRates: number;
 }

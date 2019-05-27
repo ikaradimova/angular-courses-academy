@@ -11,16 +11,15 @@ import {CoursesService} from './core/courses.service';
 import {AppRoutingModule} from './app-routing.module';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
-import {UserComponent} from './user/user.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthGuard} from './core/auth.guard';
 import {AuthService} from './core/auth.service';
 import {AngularFireAuth} from '@angular/fire/auth/auth';
-import {UserResolver} from './user/user.resolver';
 import {UserService} from './core/user.service';
 import {UsersComponent} from './users/users.component';
 import {AddCourseComponent} from './add-course/add-course.component';
 import {NavbarComponent} from "./navbar/navbar.component";
+import { MyCoursesComponent } from './my-courses/my-courses.component';
 
 @NgModule({
     declarations: [
@@ -29,10 +28,10 @@ import {NavbarComponent} from "./navbar/navbar.component";
         CourseComponent,
         LoginComponent,
         RegisterComponent,
-        UserComponent,
         UsersComponent,
         AddCourseComponent,
-        NavbarComponent
+        NavbarComponent,
+        MyCoursesComponent
     ],
     imports: [
         BrowserModule,
@@ -47,7 +46,6 @@ import {NavbarComponent} from "./navbar/navbar.component";
         AuthGuard,
         AuthService,
         AngularFireAuth,
-        UserResolver,
         UserService
     ],
     bootstrap: [AppComponent]

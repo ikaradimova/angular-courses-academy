@@ -2,8 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CoursesService} from "../core/courses.service";
-import {empty} from "rxjs/internal/Observer";
-import {User} from "../user";
 import {Course} from "../course";
 
 @Component({
@@ -24,29 +22,21 @@ export class AddCourseComponent implements OnInit {
 
     ) {
         this.route.params.subscribe((params) => {
-            console.log(params);
+            // console.log(params);
 
             if (params.id) {
                 this.courseService.getCourse(params.id)
                     .subscribe(
                         actionArray => {
-                            console.log(actionArray);
+                            // console.log(actionArray);
                             let course  = {
                                 uid: actionArray.payload.id,
                                 ...actionArray.payload.data()
                             } as Course;
-                            console.log(course);
+                            // console.log(course);
                             this.createForm();
                             this.addCourseForm.patchValue({...course});
                         }
-                        // (course) => {
-                    //     console.log({...course});
-                    //     this.createForm();
-                    //
-                    //     this.addCourseForm.patchValue({...course});
-                    //     // this.userForm.name = user.name;
-                    //     // this.userForm.password = user.paswwrod;
-                    // }
                 );
             }
         });
@@ -62,12 +52,9 @@ export class AddCourseComponent implements OnInit {
     }
 
     addCourse(value) {
-
-        console.log(value);
+        // console.log(value);
         this.courseService.addCourse(value)
             .then(
-                // function () {
-                // console.log('then')
                 res => {
                     this.errorMessage = "";
                     this.successMessage = "You added new course successfully.";
@@ -76,15 +63,7 @@ export class AddCourseComponent implements OnInit {
                         // var router: Router;
                         routerSelf.navigate(['/courses']);
                     }, 2000);
-
-                    //   // document.location.href = '/courses';
-                    //   // location.href = "/courses";
-                    console.log(res);
-                    // this.errorMessage = "";
-                    // this.successMessage = "You added new course successfully.";
-                    // window.location.href = '/courses';
                 }, err => {
-                    console.log(err);
                     this.errorMessage = err.message;
                     this.successMessage = "";
                 });

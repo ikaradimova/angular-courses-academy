@@ -1,9 +1,7 @@
-import {Component, OnInit, SimpleChange, SimpleChanges} from '@angular/core';
-import {Observable, of} from "rxjs";
+import {Component, OnInit} from '@angular/core';
 import {AngularFirestore} from "@angular/fire/firestore";
 import {User} from "../user";
 import {UserService} from "../core/user.service";
-import * as firebase from 'firebase/app';
 
 @Component({
     selector: 'app-users',
@@ -12,9 +10,13 @@ import * as firebase from 'firebase/app';
 })
 export class UsersComponent implements OnInit {
     public users: User[];
+    public user: User;
+    public isLogged = false;
+    public userRole: string = '';
 
     ngOnInit() {
         this.getUsers();
+        this.getCurrentUser();
     }
 
     constructor(db: AngularFirestore, private userService: UserService) {
@@ -24,13 +26,11 @@ export class UsersComponent implements OnInit {
     changePermissions(isBlocked, uid) {
         this.userService.changePermissions(isBlocked, uid)
             .then(res => {
-                console.log(res);
             }, err => {
-                console.log(err);
             });
     }
 
-    getUsers(){
+    getUsers() {
         this.userService.getUsers().subscribe(actionArray => {
             this.users = actionArray.map(item => {
                 return {
@@ -45,9 +45,24 @@ export class UsersComponent implements OnInit {
         this.userService.changeRole(role, uid)
             .then(res => {
                 this.getUsers();
-                console.log(res);
             }, err => {
-                console.log(err);
+            });
+    }
+
+    getCurrentUser() {
+        return this.userService.getLoggedInUser()
+            .subscribe(user => {
+                if (user !== null) {
+                    this.isLogged = true;
+                    this.userService.getUser(user.uid).subscribe(
+                        actionArray => {
+                            this.user = {
+                                uid: actionArray.payload.id,
+                                ...actionArray.payload.data()
+                            } as User;
+                            this.userRole = this.user.role;
+                        })
+                }
             });
     }
 }

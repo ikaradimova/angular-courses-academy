@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {AuthService} from '../core/auth.service'
-import {Router, Params} from '@angular/router';
+import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -31,15 +31,12 @@ export class RegisterComponent {
     }
 
     tryRegister(value) {
-        console.log(value);
         this.authService.doRegister(value)
             .then(res => {
-                console.log(res);
                 this.errorMessage = "";
                 this.successMessage = "Your account has been created";
                 this.router.navigate(['/login']);
             }, err => {
-                console.log(err);
                 this.errorMessage = err.message;
                 this.successMessage = "";
             })

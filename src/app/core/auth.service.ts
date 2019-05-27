@@ -1,34 +1,15 @@
 import {Injectable} from "@angular/core";
-// import 'rxjs/add/operator/toPromise';
 import {AngularFireAuth} from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
-import {Observable} from "rxjs/internal/Observable";
-import {FirebaseUserModel} from './user.model';
 import {AngularFirestore} from "@angular/fire/firestore";
 
 @Injectable()
 export class AuthService {
 
-    user$: Observable<FirebaseUserModel>;
-
-    constructor(public afAuth: AngularFireAuth, public db: AngularFirestore) {
+    constructor(public afAuth: AngularFireAuth,
+                public db: AngularFirestore) {
     }
 
-    doGoogleLogin() {
-        return new Promise<any>((resolve, reject) => {
-            let provider = new firebase.auth.GoogleAuthProvider();
-            provider.addScope('profile');
-            provider.addScope('email');
-            this.afAuth.auth
-                .signInWithPopup(provider)
-                .then(res => {
-                    resolve(res);
-                }, err => {
-                    console.log(err);
-                    reject(err);
-                })
-        })
-    }
 
     doRegister(value) {
         return new Promise<any>((resolve, reject) => {
@@ -39,19 +20,20 @@ export class AuthService {
         })
     }
 
-    addAdditionalInfoWhenRegister(username){
-        console.log(firebase.auth().currentUser.uid);
+    addAdditionalInfoWhenRegister(username) {
+        // console.log(firebase.auth().currentUser.uid);
         this.db.collection("users").doc(firebase.auth().currentUser.uid).set({
             username: username,
             role: "user",
             isBlocked: false,
-            email: firebase.auth().currentUser.email
+            email: firebase.auth().currentUser.email,
+            joinedCourses: []
         })
-            .then(function() {
-                console.log("Success");
+            .then(function () {
+                // console.log("Success");
             })
-            .catch(function(error) {
-                console.error("Error: ", error);
+            .catch(function (error) {
+                // console.error("Error: ", error);
             });
     }
 

@@ -8,8 +8,6 @@ import {User} from "../user";
 import {UserService} from "../core/user.service";
 import {Route, Router} from "@angular/router";
 
-// import 'rxjs/add/operator/toPromise';
-
 @Component({
     selector: 'app-courses',
     templateUrl: './courses.component.html',
@@ -17,17 +15,15 @@ import {Route, Router} from "@angular/router";
 })
 export class CoursesComponent implements OnInit {
     public courses: Course[];
-    user: User;
-    isLogged = false;
-    userRole: string = '';
+    public user: User;
+    public isLogged = false;
+    public userRole: string = '';
 
     constructor(public coursesService: CoursesService,
                 public db: AngularFirestore,
                 public userService: UserService,
                 public router: Router) {
-        // this.courses = coursesService.getCourses();
         this.getCourses();
-        console.log(this.courses);
     }
 
     ngOnInit() {
@@ -46,14 +42,16 @@ export class CoursesComponent implements OnInit {
     }
 
     getCurrentUser() {
-        this.userService.getLoggedInUser()
+        return this.userService.getLoggedInUser()
             .subscribe(user => {
                 if (user !== null) {
                     this.isLogged = true;
                     this.userService.getUser(user.uid).subscribe(
                         actionArray => {
-                            console.log(actionArray);
-                            this.user = {...actionArray.payload.data()} as User;
+                            this.user = {
+                                uid: actionArray.payload.id,
+                                ...actionArray.payload.data()
+                            } as User;
                             this.userRole = this.user.role;
                         })
                 }
@@ -65,8 +63,14 @@ export class CoursesComponent implements OnInit {
     }
 
     editCourse(uid) {
-        // this.router.navigate(['courses/add', uid]);
         this.router.navigate(['add-course/', uid]);
-        // this.router.navigate(['add-course/', uid]);
+    }
+
+    joinCourse(userId, courseId) {
+        this.userService.joinCourse(userId, courseId);
+    }
+
+    showCourse(courseId) {
+        this.router.navigate(['course/', courseId]);
     }
 }

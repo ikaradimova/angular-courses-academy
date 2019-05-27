@@ -3,7 +3,6 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 import {User} from "../user";
-import {FirebaseUserModel} from "./user.model";
 
 @Injectable()
 export class UserService {
@@ -32,7 +31,6 @@ export class UserService {
     }
 
     getLoggedInUser() {
-        console.log(this.afAuth.authState);
         return this.afAuth.authState;
     }
 
@@ -40,12 +38,12 @@ export class UserService {
     updateCurrentUser(value) {
         return new Promise<any>((resolve, reject) => {
             var user = firebase.auth().currentUser;
-            console.log(user);
+            // console.log(user);
             user.updateProfile({
                 displayName: value.name,
                 photoURL: user.photoURL
             }).then(res => {
-                console.log('success');
+                // console.log('success');
                 resolve(res)
             }, err => reject(err))
         })
@@ -65,26 +63,38 @@ export class UserService {
                 isBlocked: isBlocked,
             })
                 .then(function () {
-                    console.log("Success");
+                    // console.log("Success");
                 })
                 .catch(function (error) {
-                    console.error("Error: ", error);
+                    // console.error("Error: ", error);
                 });
         })
     }
 
     changeRole(role, uid) {
         let dbSelf = this.db;
-
         return new Promise<any>((resolve, reject) => {
             dbSelf.collection("users").doc(uid).update({
                 role: role
             })
                 .then(function () {
-                    console.log("Success");
+                    // console.log("Success");
                 })
                 .catch(function (error) {
-                    console.error("Error: ", error);
+                    // console.error("Error: ", error);
+                });
+        })
+    }
+    joinCourse(userId, courseId){
+        return new Promise<any>((resolve, reject) => {
+            this.db.collection('users').doc(userId).update({
+                joinedCourses: firebase.firestore.FieldValue.arrayUnion(courseId),
+            })
+                .then( res => {
+                    resolve();
+                })
+                .catch(function(error) {
+                    console.error("Error adding document: ", error);
                 });
         })
     }
