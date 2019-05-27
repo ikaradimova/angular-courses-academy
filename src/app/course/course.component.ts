@@ -37,6 +37,7 @@ export class CourseComponent implements OnInit {
                                 this.noCourseErrorMessage = 'Ooops, no course found.'
                             } else {
                                 this.course = course;
+                                console.log(this.course);
                             }
                         }
                     );

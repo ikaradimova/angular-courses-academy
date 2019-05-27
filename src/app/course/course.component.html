@@ -1,7 +1,8 @@
-<ng-template [ngIf]="course">
+<ng-template [ngIf]="course !== undefined">
     <h1>{{course.title}}</h1>
     <p>{{course.description}}</p>
     <ng-template [ngIf]="isLogged && user.role === 'user'">
+        <div class="rating-container">
         <div>
             Rate this course:
         </div>
@@ -27,6 +28,7 @@
             <input type="radio" id="starhalf" name="rating" value="half" (click)="rateCourse(0.5)"/>
             <label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
         </fieldset>
+        </div>
     </ng-template>
 
 </ng-template>
