@@ -1,15 +1,18 @@
 <div *ngFor="let course of courses">
     <div class="course-card col-2">
-        <!--  <span class="delete-btn"-->
-        <!--        tooltip="Delete"-->
-        <!--        placement="top"-->
-        <!--        container="body"-->
-        <!--        title="Delete"-->
-        <!--        (click)="onDeleteClicked()"-->
-        <!--  >X</span>-->
-        <!--  <div class="image-holder">-->
-        <!--    <img class="user-img" [src]="getUserImage()" alt="user picture" />-->
-        <!--  </div>-->
+        <ng-template [ngIf]="isLogged && userRole == 'admin'" >
+            <div class="action-holder">
+                <i class="fas fa-edit" (click)="editCourse(course.uid)"></i>
+                <i class="fas fa-trash-alt" (click)="deleteCourse(course.uid)"></i>
+            </div>
+        </ng-template>
+        <ng-template [ngIf]="isLogged && userRole == 'user'" >
+            <div  class="action-holder">
+                <i class="fas fa-cart-plus"></i>
+                <i class="fas fa-star"></i>
+            </div>
+
+        </ng-template>
         <div class="info-holder">
             <div class="title">
                 <span>{{ course.title }}</span>

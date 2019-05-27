@@ -6,3 +6,13 @@
     margin: 1em;
     padding: 0.5em;
 }
+
+i{
+    padding: 3px;
+}
+
+.action-holder{
+    position:absolute;
+    top:0;
+    right:0;
+}

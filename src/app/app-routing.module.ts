@@ -17,7 +17,8 @@ const routes: Routes = [
     {path: 'register', component: RegisterComponent/*, canActivate: [AuthGuard]*/},
     {path: 'user', component: UserComponent, resolve: {data: UserResolver}},
     {path: 'users', component: UsersComponent},
-    {path: 'add-course', component: AddCourseComponent}
+    {path: 'add-course', component: AddCourseComponent},
+    {path: 'add-course/:id', component: AddCourseComponent}
 ];
 
 @NgModule({

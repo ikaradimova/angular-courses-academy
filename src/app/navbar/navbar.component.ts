@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core'
-import { AuthService } from '../core/auth.service'
+import {Component, OnInit} from '@angular/core'
+import {AuthService} from '../core/auth.service'
 import {UsersService} from "../users.service";
 import {UserService} from "../core/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -14,22 +14,38 @@ import {User} from "../user";
 export class NavbarComponent implements OnInit {
     isLogged = false;
     loggedUser = null;
+    user: User;
+    userRole: string = '';
 
     constructor(public auth: AuthService,
                 public userService: UserService,
                 public authService: AuthService,
-                private location : Location,
+                private location: Location,
                 public router: Router,) {
 
     }
 
     ngOnInit() {
         this.getCurrentUser();
+        // console.log(this.isLogged);
+        // this.userService.getLoggedInUser()
+        //     .subscribe(user => {
+        //         if (user !== null) {
+        //             this.isLogged = true;
+        //             this.userService.getUser(user.uid).subscribe(
+        //                 actionArray => {
+        //                     console.log(actionArray);
+        //                     this.user = {...actionArray.payload.data()} as User;
+        //                     this.userRole = this.user.role;
+        //                 })
+        //         }
+        //     });
     }
 
-    logout(){
+    logout() {
         this.authService.doLogout()
             .then((res) => {
+                this.isLogged = false;
                 this.router.navigate(['/courses']);
                 // this.location.back();
             }, (error) => {
@@ -37,29 +53,18 @@ export class NavbarComponent implements OnInit {
             });
     }
 
-    getCurrentUser(): Promise<boolean>{
-        return new Promise((resolve, reject) => {
-            this.userService.getCurrentUser()
-                .then(user => {
-                    console.log(user);
+    getCurrentUser()/*: Promise<boolean>*/ {
+        this.userService.getLoggedInUser()
+            .subscribe(user => {
+                if (user !== null) {
                     this.isLogged = true;
-                    let uid = user.uid;
-                    this.userService.getUser(uid).subscribe(actionArray => {
-                        console.log(actionArray);
-                        this.loggedUser =  {
-                                uid: actionArray.payload.id,
-                                ...actionArray.payload.data()
-                            } as User;
-                        // let currentUser = this.userService.getUser(uid);
-                        // console.log(currentUser);
-                    });
-                    console.log(this.loggedUser);
-                    // this.router.navigate(['/user']);
-                    return resolve(false);
-                }, err => {
-                    console.log(err);
-                    return resolve(true);
-                })
-        })
+                    this.userService.getUser(user.uid).subscribe(
+                        actionArray => {
+                            console.log(actionArray);
+                            this.user = {...actionArray.payload.data()} as User;
+                            this.userRole = this.user.role;
+                        })
+                }
+            });
     }
 }

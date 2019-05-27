@@ -3,6 +3,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 import {User} from "../user";
+import {FirebaseUserModel} from "./user.model";
 
 @Injectable()
 export class UserService {
@@ -29,6 +30,12 @@ export class UserService {
             })
         })
     }
+
+    getLoggedInUser() {
+        console.log(this.afAuth.authState);
+        return this.afAuth.authState;
+    }
+
 
     updateCurrentUser(value) {
         return new Promise<any>((resolve, reject) => {
