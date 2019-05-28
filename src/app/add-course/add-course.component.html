@@ -1,7 +1,7 @@
 <h1 class="header">Add course</h1>
 <div class="container">
   <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-12">
       <form [formGroup]="addCourseForm">
         <div class="form-group">
           <label>Title</label>
@@ -16,7 +16,7 @@
           <label class="error">{{errorMessage}}</label>
           <label class="success">{{successMessage}}</label>
         </div>
-        <button type="submit" (click)="addCourse(addCourseForm.value)" class="btn btn-default">Submit course</button>
+        <button type="submit" (click)="addCourse(addCourseForm.value)" class="btn btn-outline-primary">Submit course</button>
       </form>
     </div>
   </div>

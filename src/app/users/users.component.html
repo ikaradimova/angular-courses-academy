@@ -1,8 +1,8 @@
 <ng-template [ngIf]="isLogged && user.role === 'admin'">
-    <table class="table">
+    <h1 class="header">Users</h1>
+    <table class="table col-md-12">
         <thead>
         <tr>
-            <th scope="col">UID</th>
             <th scope="col">Email</th>
             <th scope="col">Username</th>
             <th scope="col">Role</th>
@@ -11,19 +11,18 @@
         </thead>
         <tbody *ngFor="let user of users">
         <tr>
-            <td>{{user.uid}}</td>
             <td>{{user.email}}</td>
             <td>{{user.username}}</td>
             <td>{{user.role}}</td>
             <td>
-                <button *ngIf="user.role === 'user'" (click)="changeRole('admin', user.uid)">Make Admin</button>
-                <button *ngIf="user.role === 'admin'" (click)="changeRole('user', user.uid)">Make User</button>
+                <button class="btn btn-outline-primary" *ngIf="user.role === 'user'" (click)="changeRole('admin', user.uid)">Make Admin</button>
+                <button class="btn btn-outline-primary" *ngIf="user.role === 'admin'" (click)="changeRole('user', user.uid)">Make User</button>
                 <ng-container *ngIf="user.isBlocked === true; then activateUser else blockUser">test</ng-container>
                 <ng-template #activateUser>
-                    <button (click)="changePermissions(false, user.uid)">Activate user</button>
+                    <button class="btn btn-outline-primary" (click)="changePermissions(false, user.uid)">Activate user</button>
                 </ng-template>
                 <ng-template #blockUser>
-                    <button (click)="changePermissions(true, user.uid)">Block user</button>
+                    <button class="btn btn-outline-primary" (click)="changePermissions(true, user.uid)">Block user</button>
                 </ng-template>
             </td>
         </tr>

@@ -56,8 +56,10 @@ export class MyCoursesComponent implements OnInit {
                                                     uid: actionArray.payload.id,
                                                     ...actionArray.payload.data()
                                                 } as Course;
-                                                joinedCourses.push(course);
-
+                                                console.log(course);
+                                                if(course.title !== undefined && course.description !== undefined){
+                                                    joinedCourses.push(course);
+                                                }
                                             }
                                         );
                                 });

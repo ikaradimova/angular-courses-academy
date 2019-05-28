@@ -1,6 +1,6 @@
 <ng-template [ngIf]="course !== undefined">
-    <h1>{{course.title}}</h1>
-    <p>{{course.description}}</p>
+    <h1 class="header">{{course.title}}</h1>
+    <p class="col-md-12 description">{{course.description}}</p>
     <ng-template [ngIf]="isLogged && user.role === 'user'">
         <div class="rating-container">
         <div>
