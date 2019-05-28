@@ -16,7 +16,7 @@ export class NavbarComponent implements OnInit {
     constructor(public auth: AuthService,
                 public userService: UserService,
                 public authService: AuthService,
-                public router: Router,) {
+                public router: Router) {
 
     }
 
@@ -27,8 +27,7 @@ export class NavbarComponent implements OnInit {
     logout() {
         this.authService.doLogout()
             .then((res) => {
-                this.router.navigate(['/courses']);
-                location.reload();
+                this.router.navigate(['/login']);
                 this.isLogged = false;
             }, (error) => {
             });

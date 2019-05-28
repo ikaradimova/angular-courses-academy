@@ -2,8 +2,16 @@
     text-align: center;
 }
 
-.row{
+.row {
     margin: auto;
     width: 50%;
     padding: 10px;
+}
+
+.error {
+    color: red;
+}
+
+.success {
+    color: green;
 }

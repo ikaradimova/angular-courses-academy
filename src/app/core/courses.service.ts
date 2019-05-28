@@ -10,17 +10,16 @@ export class CoursesService {
     }
 
     addCourse(value) {
-        // console.log(value);
-        if(value.uid){
+        if (value.uid) {
             return new Promise<any>((resolve, reject) => {
                 this.db.collection('courses').doc(value.uid).update({
                     title: value.title,
                     description: value.description
                 })
-                    .then( res => {
+                    .then(res => {
                         resolve();
                     })
-                    .catch(function(error) {
+                    .catch(function (error) {
                         console.error("Error adding document: ", error);
                     });
             })
@@ -33,10 +32,10 @@ export class CoursesService {
                     rate: 0,
                     numberOfRates: 0
                 })
-                    .then( res => {
+                    .then(res => {
                         resolve();
                     })
-                    .catch(function(error) {
+                    .catch(function (error) {
                         console.error("Error adding document: ", error);
                     });
             })
@@ -44,24 +43,21 @@ export class CoursesService {
 
     }
 
-    getCourses(){
+    getCourses() {
         return this.db.collection('courses').snapshotChanges();
     }
 
-    deleteCourse(uid){
-        return this.db.collection('courses').doc(uid).delete().then(function() {
-            // console.log("Document successfully deleted!");
-        }).catch(function(error) {
-            // console.error("Error removing document: ", error);
+    deleteCourse(uid) {
+        return this.db.collection('courses').doc(uid).delete().then(function () {
+        }).catch(function (error) {
         });
     }
 
-    getCourse(uid){
-        // console.log(uid);
+    getCourse(uid) {
         return this.db.collection('courses').doc(uid).snapshotChanges();
     }
 
-    rateCourse(rate, course){
+    rateCourse(rate, course) {
         let newRate = course.rate + rate;
         let newNumberOfRates = course.numberOfRates + 1;
         let newRating = newRate / newNumberOfRates;
@@ -72,10 +68,8 @@ export class CoursesService {
                 rating: newRating
             })
                 .then(function () {
-                    // console.log("Success");
                 })
                 .catch(function (error) {
-                    // console.error("Error: ", error);
                 });
         })
     }

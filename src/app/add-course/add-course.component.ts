@@ -19,25 +19,21 @@ export class AddCourseComponent implements OnInit {
         public router: Router,
         private fb: FormBuilder,
         private route: ActivatedRoute
-
     ) {
         this.route.params.subscribe((params) => {
-            // console.log(params);
 
             if (params.id) {
                 this.courseService.getCourse(params.id)
                     .subscribe(
                         actionArray => {
-                            // console.log(actionArray);
-                            let course  = {
+                            let course = {
                                 uid: actionArray.payload.id,
                                 ...actionArray.payload.data()
                             } as Course;
-                            // console.log(course);
                             this.createForm();
                             this.addCourseForm.patchValue({...course});
                         }
-                );
+                    );
             }
         });
         this.createForm();
@@ -52,15 +48,13 @@ export class AddCourseComponent implements OnInit {
     }
 
     addCourse(value) {
-        // console.log(value);
         this.courseService.addCourse(value)
             .then(
                 res => {
                     this.errorMessage = "";
-                    this.successMessage = "You added new course successfully.";
+                    this.successMessage = "Success.";
                     var routerSelf = this.router;
                     setTimeout(function () {
-                        // var router: Router;
                         routerSelf.navigate(['/courses']);
                     }, 2000);
                 }, err => {

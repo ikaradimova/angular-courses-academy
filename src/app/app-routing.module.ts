@@ -13,7 +13,7 @@ const routes: Routes = [
     {path: 'courses', component: CoursesComponent},
     {path: '', redirectTo: 'courses', pathMatch: 'full'},
     {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
-    {path: 'register', component: RegisterComponent, canActivate: [AuthGuard]},
+    {path: 'register', component: RegisterComponent/*, canActivate: [AuthGuard]*/},
     {path: 'users', component: UsersComponent},
     {path: 'add-course', component: AddCourseComponent},
     {path: 'add-course/:id', component: AddCourseComponent},

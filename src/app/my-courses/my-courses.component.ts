@@ -32,7 +32,6 @@ export class MyCoursesComponent implements OnInit {
     }
 
     getCurrentUser() {
-        // let user = new User();
         let coursesServiceSelf = this.coursesService;
         this.userService.getLoggedInUser()
             .subscribe(user => {
@@ -56,8 +55,7 @@ export class MyCoursesComponent implements OnInit {
                                                     uid: actionArray.payload.id,
                                                     ...actionArray.payload.data()
                                                 } as Course;
-                                                console.log(course);
-                                                if(course.title !== undefined && course.description !== undefined){
+                                                if (course.title !== undefined && course.description !== undefined) {
                                                     joinedCourses.push(course);
                                                 }
                                             }

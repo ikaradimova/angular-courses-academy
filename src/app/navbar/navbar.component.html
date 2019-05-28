@@ -1,20 +1,20 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light">
     <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-iteml">
                 <a class="nav-link" href="/courses">Courses</a>
             </li>
-            <ng-template [ngIf]="isLogged && userRole == 'admin'">
+            <ng-template [ngIf]="isLogged && userRole == 'admin' && user.isBlocked === false">
                 <li class="nav-item">
                     <a class="nav-link" href="/add-course">Add course</a>
                 </li>
             </ng-template>
-            <ng-template [ngIf]="isLogged && userRole == 'user'">
+            <ng-template [ngIf]="isLogged && userRole == 'user' && user.isBlocked === false">
                 <li class="nav-item">
                     <a class="nav-link" href="/my-courses">My courses</a>
                 </li>
             </ng-template>
-            <ng-template [ngIf]="isLogged && userRole == 'admin'">
+            <ng-template [ngIf]="isLogged && userRole == 'admin' && user.isBlocked === false">
                 <li class="nav-item">
                     <a class="nav-link" href="/users">Users</a>
                 </li>

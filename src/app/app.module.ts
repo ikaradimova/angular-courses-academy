@@ -19,7 +19,7 @@ import {UserService} from './core/user.service';
 import {UsersComponent} from './users/users.component';
 import {AddCourseComponent} from './add-course/add-course.component';
 import {NavbarComponent} from "./navbar/navbar.component";
-import { MyCoursesComponent } from './my-courses/my-courses.component';
+import {MyCoursesComponent} from './my-courses/my-courses.component';
 
 @NgModule({
     declarations: [

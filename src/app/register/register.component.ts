@@ -16,7 +16,7 @@ export class RegisterComponent {
 
     constructor(
         public authService: AuthService,
-        private router: Router,
+        public router: Router,
         private fb: FormBuilder
     ) {
         this.createForm();
@@ -35,7 +35,8 @@ export class RegisterComponent {
             .then(res => {
                 this.errorMessage = "";
                 this.successMessage = "Your account has been created";
-                this.router.navigate(['/login']);
+                this.router.navigate(['/courses']);
+                // location.reload();
             }, err => {
                 this.errorMessage = err.message;
                 this.successMessage = "";

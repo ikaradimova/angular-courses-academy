@@ -37,7 +37,6 @@ export class CourseComponent implements OnInit {
                                 this.noCourseErrorMessage = 'Ooops, no course found.'
                             } else {
                                 this.course = course;
-                                console.log(this.course);
                             }
                         }
                     );
@@ -56,7 +55,6 @@ export class CourseComponent implements OnInit {
                     this.isLogged = true;
                     this.userService.getUser(user.uid).subscribe(
                         actionArray => {
-                            // console.log(actionArray);
                             this.user = {
                                 uid: actionArray.payload.id,
                                 ...actionArray.payload.data()
@@ -70,9 +68,7 @@ export class CourseComponent implements OnInit {
     rateCourse(rate) {
         this.coursesService.rateCourse(rate, this.course)
             .then(res => {
-                // console.log(res);
             }, err => {
-                // console.log(err);
             });
     }
 

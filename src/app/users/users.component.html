@@ -15,14 +15,20 @@
             <td>{{user.username}}</td>
             <td>{{user.role}}</td>
             <td>
-                <button class="btn btn-outline-primary" *ngIf="user.role === 'user'" (click)="changeRole('admin', user.uid)">Make Admin</button>
-                <button class="btn btn-outline-primary" *ngIf="user.role === 'admin'" (click)="changeRole('user', user.uid)">Make User</button>
+                <button class="btn btn-outline-primary" *ngIf="user.role === 'user'"
+                        (click)="changeRole('admin', user.uid)">Make Admin
+                </button>
+                <button class="btn btn-outline-primary" *ngIf="user.role === 'admin'"
+                        (click)="changeRole('user', user.uid)">Make User
+                </button>
                 <ng-container *ngIf="user.isBlocked === true; then activateUser else blockUser">test</ng-container>
                 <ng-template #activateUser>
-                    <button class="btn btn-outline-primary" (click)="changePermissions(false, user.uid)">Activate user</button>
+                    <button class="btn btn-outline-primary" (click)="changePermissions(false, user.uid)">Activate user
+                    </button>
                 </ng-template>
                 <ng-template #blockUser>
-                    <button class="btn btn-outline-primary" (click)="changePermissions(true, user.uid)">Block user</button>
+                    <button class="btn btn-outline-primary" (click)="changePermissions(true, user.uid)">Block user
+                    </button>
                 </ng-template>
             </td>
         </tr>

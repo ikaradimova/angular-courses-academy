@@ -4,16 +4,16 @@
 
 
 export const environment = {
-  production: false,
-  firebase: {
-    apiKey: "AIzaSyBQJ9zfyWBuNen6IGEvh4lHTdAgNEJHIEM",
-    authDomain: "angular-courses-academy.firebaseapp.com",
-    databaseURL: "https://angular-courses-academy.firebaseio.com",
-    projectId: "angular-courses-academy",
-    storageBucket: "angular-courses-academy.appspot.com",
-    messagingSenderId: "233346361597",
-    appId: "1:233346361597:web:e8eb7d93fb29bafc"
-  }
+    production: false,
+    firebase: {
+        apiKey: "AIzaSyBQJ9zfyWBuNen6IGEvh4lHTdAgNEJHIEM",
+        authDomain: "angular-courses-academy.firebaseapp.com",
+        databaseURL: "https://angular-courses-academy.firebaseio.com",
+        projectId: "angular-courses-academy",
+        storageBucket: "angular-courses-academy.appspot.com",
+        messagingSenderId: "233346361597",
+        appId: "1:233346361597:web:e8eb7d93fb29bafc"
+    }
 };
 /*
  * For easier debugging in development mode, you can import the following file

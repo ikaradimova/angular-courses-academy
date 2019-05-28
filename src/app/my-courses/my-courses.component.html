@@ -1,4 +1,4 @@
-<ng-template [ngIf]="isLogged && userRole === 'user'">
+<ng-template [ngIf]="isLogged && userRole === 'user' && user.isBlocked === false">
   <ng-template *ngIf="joinedCourses === undefined">
     <p>No joined courses</p>
   </ng-template>

@@ -21,7 +21,6 @@ export class AuthService {
     }
 
     addAdditionalInfoWhenRegister(username) {
-        // console.log(firebase.auth().currentUser.uid);
         this.db.collection("users").doc(firebase.auth().currentUser.uid).set({
             username: username,
             role: "user",
@@ -30,10 +29,8 @@ export class AuthService {
             joinedCourses: []
         })
             .then(function () {
-                // console.log("Success");
             })
             .catch(function (error) {
-                // console.error("Error: ", error);
             });
     }
 
@@ -49,7 +46,7 @@ export class AuthService {
     doLogout() {
         return new Promise((resolve, reject) => {
             if (firebase.auth().currentUser) {
-                this.afAuth.auth.signOut()
+                this.afAuth.auth.signOut();
                 resolve();
             } else {
                 reject();
