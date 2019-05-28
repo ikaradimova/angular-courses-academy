@@ -1,17 +1,28 @@
-.header{
+.header {
   text-align: center;
   font-size: 30px;
   margin-bottom: 40px;
 }
 
-.row{
+.row {
   margin-top: 10px;
 }
 
-.error{
+.error {
   color: red;
 }
 
-.success{
+.success {
   color: green;
+}
+
+.row {
+  margin: auto;
+  width: 30%;
+  padding: 10px;
+}
+
+.login-into-account {
+  text-align: center;
+  padding: 25px;
 }
