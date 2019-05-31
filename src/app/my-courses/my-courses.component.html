@@ -1,19 +1,20 @@
 <ng-template [ngIf]="isLogged && userRole === 'user' && user.isBlocked === false">
-  <ng-template *ngIf="joinedCourses === undefined">
-    <p>No joined courses</p>
-  </ng-template>
-  <div *ngFor="let course of joinedCourses">
-      <div class="course-card col-2">
-        <div class="info-holder">
-          <div class="title">
-            <span>{{ course.title }}</span>
-          </div>
-          <hr>
-          <div class="description">
-            <span>{{ course.description }}</span>
-          </div>
+    <ng-template *ngIf="joinedCourses === undefined">
+        <p>No joined courses</p>
+    </ng-template>
+    <div *ngFor="let course of joinedCourses">
+        <div class="course-card col-2">
+            <div class="info-holder">
+                <div class="title">
+                    <span>{{ course.title }}</span>
+                </div>
+                <hr>
+                <div class="description">
+                    <span>{{ course.description.substr(0, 60) }}</span>...
+                    <span class="read-more" (click)="showCourse(course.uid)"> (Read more)</span>
+                </div>
+            </div>
         </div>
-      </div>
-  </div>
+    </div>
 </ng-template>
 

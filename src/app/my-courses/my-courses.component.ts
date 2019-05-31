@@ -69,4 +69,8 @@ export class MyCoursesComponent implements OnInit {
 
     }
 
+    showCourse(courseId) {
+        this.router.navigate(['course/', courseId]);
+    }
+
 }

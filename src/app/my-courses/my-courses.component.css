@@ -16,3 +16,8 @@ i {
     top: 0;
     right: 0;
 }
+
+.read-more {
+    cursor: pointer;
+    color: #007bff;
+}
